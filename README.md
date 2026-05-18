@@ -1,2 +1,16 @@
 # -SmartCity--IoT-Environmental-Monitor-Dashboard_CloudComputing_capstone
 Group5_CloudComputing_capstone
+Business Context: The "Green City" initiative needs to monitor urban air quality (CO2, NO2, Temperature). They have thousands of simulated sensors across the city. They need a centralized "Command Center" where city officials can see live heatmaps and receive alerts if pollution levels in a specific district become dangerous.
+
+Core Technical Objectives:
+- Ingest real-time IoT data streams.
+- Process and aggregate data (e.g., calculating hourly averages).
+- Host a public-facing visualization dashboard on EC2.
+
+Architectural Components:
+- Sensors: A Python script running on a local machine (or another EC2) simulating MQTT traffic to AWS IoT Core or HTTP traffic to API Gateway.
+- Processing: AWS Lambda processes the raw sensor data and stores it in Amazon DynamoDB.
+- EC2 Dashboard: An EC2 instance running a web server (e.g., Flask/Django) that hosts an interactive map (Leaflet.js) showing the sensor locations and live readings.
+- Alerting: Amazon SNS to send "Dangerous Level" alerts to city officials' emails.
+
+Advanced Challenge: Use S3 Static Website Hosting for a secondary "Citizen's View" page that fetches data from the same DynamoDB via an API, demonstrating a multi-channel visualization strategy.
