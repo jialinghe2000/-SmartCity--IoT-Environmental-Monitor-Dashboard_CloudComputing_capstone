@@ -1,4 +1,4 @@
-# -SmartCity--IoT-Environmental-Monitor-Dashboard
+# SmartCity--IoT-Environmental-Monitor-Dashboard
 Group5_CloudComputing_capstone
 Business Context: The "Green City" initiative needs to monitor urban air quality (CO2, NO2, Temperature). They have thousands of simulated sensors across the city. They need a centralized "Command Center" where city officials can see live heatmaps and receive alerts if pollution levels in a specific district become dangerous.
 
