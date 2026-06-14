@@ -1,14 +1,6 @@
-there are 2 function in lambda:
-1\ SmartCityProcessSensorData
-responsibilities:
-1.validate sensor data from sensor(/sensor simulator) through API Gateway
-2.define pollution status
-3.store row data to DynamoDB
-4.trigger SNS Alert
-5.return API Gateway comstible response
-
-2\Aggregator
-responsiblity
-1.scan raw data from DynamoDB table
-2.Group and calculate sums by district
-3.Calculate averages and write to DynamoDB table - Aggregates
+in citizen-view 
+customers can see current air quality status inlcuding:
+1. aggregated data from each sensor
+2. amount of sensors
+3. amount of dangerous alerts
+4. dashboard status
