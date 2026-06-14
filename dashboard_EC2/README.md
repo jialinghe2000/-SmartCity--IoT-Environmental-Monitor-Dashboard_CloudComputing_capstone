@@ -20,12 +20,8 @@ Functions:
 ## Architecture
 
 DynamoDB
-
       ↓
-      
 Flask API
-
       ↓
-      
 Dashboard
 
