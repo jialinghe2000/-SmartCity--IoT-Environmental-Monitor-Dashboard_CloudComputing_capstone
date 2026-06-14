@@ -1,0 +1,13 @@
+🚨 EMERGENCY ALERT
+
+District: Downtown
+
+Sensor: S001
+
+Temperature: 41°C
+
+CO2: 1200 ppm
+
+NO2: 95 ppb
+
+Please dispatch an environmental officer immediately.
