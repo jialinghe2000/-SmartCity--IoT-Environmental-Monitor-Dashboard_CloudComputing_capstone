@@ -1,7 +1,9 @@
 # EC2 Dashboard
 
 This module hosts the SmartCity administrative dashboard on AWS EC2.
+
 EC2-hosted Flask Dashboard.
+
 Functions:
 - Read sensor data from DynamoDB
 - Provide REST API
