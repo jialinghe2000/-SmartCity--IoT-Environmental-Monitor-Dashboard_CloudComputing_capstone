@@ -25,8 +25,8 @@ Sensor Simulator
 API Gateway
       ↓
 Lambda
-      ↓
-DynamoDB
+      ↓ 
+DynamoDB & SNS
       ↓
 Dashboard
       ↓
