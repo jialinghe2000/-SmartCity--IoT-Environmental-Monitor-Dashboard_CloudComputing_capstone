@@ -10,7 +10,9 @@ Private Subnets-B
 Internet Gateway
 
 Security Groups:
-SSH(22)
-HTTP(80)
+
+SSH(22) - source - MyIP
+
+HTTP(80) - source - 0.0.0.0/0
 
 IAM Roles
