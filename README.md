@@ -8,7 +8,7 @@ Core Technical Objectives:
 - Host a public-facing visualization dashboard on EC2.
 
 Architectural Components:
-- Sensors: A Python script running on a local machine (or another EC2) simulating MQTT traffic to AWS IoT Core or HTTP traffic to API Gateway.
+- Sensors: A Python script running on a local machine (or another EC2) simulating HTTP traffic to API Gateway.
 - Processing: AWS Lambda processes the raw sensor data and stores it in Amazon DynamoDB.
 - EC2 Dashboard: An EC2 instance running a web server (e.g., Flask/Django) that hosts an interactive map (Leaflet.js) showing the sensor locations and live readings.
 - Alerting: Amazon SNS to send "Dangerous Level" alerts to city officials' emails.
