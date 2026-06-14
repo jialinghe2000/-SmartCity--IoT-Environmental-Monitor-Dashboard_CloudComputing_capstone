@@ -1,0 +1,7 @@
+{
+  "sensor_id":"S001",
+  "district":"Downtown",
+  "temperature":36,
+  "co2":850,
+  "no2":70
+}
