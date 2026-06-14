@@ -1,20 +1,29 @@
-# AWS Lambda Functions
+# Data Processing Module
 
-## ProcessSensorData
+Workflow
 
-Responsibilities:
+Sensor
+    ↓
+API Gateway
+    ↓
+ProcessSensorData Lambda
+    ↓
+DynamoDB
+    ↓
+SNS Alert
 
-- Validate incoming sensor data
-- Classify pollution levels
-- Store records into DynamoDB
-- Trigger SNS alerts
-- Support serverless processing
+Background Processing
 
-## data_aggregator
+DynamoDB
+    ↓
+data_aggregator Lambda
+    ↓
+SmartCityAggregates
 
-Responsibilities:
 
-- Scan raw sensor records
-- Group by district
-- Calculate average values
-- Store aggregated data
+Cloud Features
+
+- Serverless Computing
+- Event-driven Architecture
+- Managed Storage
+- Automatic Scaling
