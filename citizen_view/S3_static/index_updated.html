@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SmartCity Citizen View</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:#eef2f7;color:#111827}
+.header{background:#0f172a;color:white;padding:30px;text-align:center}
+.container{max-width:1100px;margin:30px auto;padding:20px}
+.card{background:white;border-radius:16px;padding:30px;box-shadow:0 8px 20px rgba(0,0,0,.12);text-align:center}
+.status{display:inline-block;padding:12px 25px;border-radius:30px;font-weight:bold;color:white;background:#f59e0b;margin:15px 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:25px}
+.box{background:#f8fafc;border-radius:12px;padding:20px;border:1px solid #e5e7eb}
+.box h3{color:#1e3a8a}
+.advisory{margin-top:25px;background:#fff7ed;border-left:6px solid #f97316;padding:18px;border-radius:10px;color:#7c2d12;text-align:left}
+.table{width:100%;border-collapse:collapse;margin-top:25px}
+.table th,.table td{padding:12px;border-bottom:1px solid #e5e7eb;text-align:center}
+.table th{background:#f1f5f9;color:#1e3a8a}
+.footer{text-align:center;color:#6b7280;padding:20px}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+<h1>SmartCity Citizen View</h1>
+<p>Live public air quality information powered by SmartCity IoT sensors</p>
+</div>
+
+<div class="container">
+<div class="card">
+<h2>Current Air Quality Status</h2>
+<div id="mainStatus" class="status">Loading...</div>
+
+<div class="grid">
+<div class="box"><h3>Total Sensors</h3><h2 id="totalSensors">0</h2></div>
+<div class="box"><h3>Dangerous Areas</h3><h2 id="dangerCount">0</h2></div>
+<div class="box"><h3>Latest Update</h3><p id="latestUpdate">Loading...</p></div>
+</div>
+
+<div class="advisory" id="advisory">Loading public advisory...</div>
+
+<table class="table">
+<thead>
+<tr>
+<th>Sensor</th>
+<th>District</th>
+<th>Temperature</th>
+<th>CO2</th>
+<th>NO2</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="sensorTable"></tbody>
+</table>
+
+</div>
+</div>
+
+<div class="footer">
+SmartCity IoT Environmental Monitoring System | Hosted on AWS S3
+</div>
+
+<script>
+const API_URL = "http://13.228.30.84/api/sensors";
+
+function loadData() {
+fetch(API_URL)
+.then(response => response.json())
+.then(data => {
+let total = data.length;
+let dangerous = data.filter(s => s.status === "DANGEROUS").length;
+let warning = data.filter(s => s.status === "WARNING").length;
+
+document.getElementById("totalSensors").innerText = total;
+document.getElementById("dangerCount").innerText = dangerous;
+
+if (data.length > 0) {
+document.getElementById("latestUpdate").innerText = data[0].timestamp;
+}
+
+let statusBox = document.getElementById("mainStatus");
+let advisory = document.getElementById("advisory");
+
+if (dangerous > 0) {
+statusBox.innerText = "Dangerous Pollution Detected";
+statusBox.style.background = "#dc2626";
+advisory.innerHTML = "<strong>Public Advisory:</strong> Dangerous pollution detected in selected areas. Citizens are advised to reduce outdoor activities and follow official safety updates.";
+} else if (warning > 0) {
+statusBox.innerText = "Moderate Pollution Detected";
+statusBox.style.background = "#f59e0b";
+advisory.innerHTML = "<strong>Public Advisory:</strong> Moderate pollution detected. Sensitive groups should limit prolonged outdoor activities.";
+} else {
+statusBox.innerText = "Air Quality Normal";
+statusBox.style.background = "#16a34a";
+advisory.innerHTML = "<strong>Public Advisory:</strong> Air quality is currently normal. No major pollution risk detected.";
+}
+
+let table = document.getElementById("sensorTable");
+table.innerHTML = "";
+
+data.forEach(sensor => {
+table.innerHTML += `
+<tr>
+<td>${sensor.sensor_id}</td>
+<td>${sensor.district}</td>
+<td>${sensor.temperature}°C</td>
+<td>${sensor.co2}</td>
+<td>${sensor.no2}</td>
+<td><strong>${sensor.status}</strong></td>
+</tr>`;
+});
+})
+.catch(error => {
+document.getElementById("mainStatus").innerText = "Unable to Load Data";
+document.getElementById("advisory").innerText = "Sensor data could not be retrieved.";
+console.error(error);
+});
+}
+
+loadData();
+setInterval(loadData, 5000);
+</script>
+
+</body>
+</html>
