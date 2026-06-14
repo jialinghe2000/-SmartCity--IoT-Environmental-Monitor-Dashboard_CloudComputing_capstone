@@ -2,6 +2,7 @@ Region:
 ap-southeast-1
 
 VPC:
+
 Public Subnets-A (EC2 Dashboard)
 
 Private Subnets-A
